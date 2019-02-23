@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -26,6 +27,10 @@ app.use('/api/users', users);
 app.use('/api/todos', todos);
 
 app.use(express.static('dist'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../../dist', 'index.html'));
+});
+
 app.get('/api/', (req, res) => res.send('heroo'));
 
 // Connect to MongoDB
