@@ -3,16 +3,17 @@ const passport = require('passport');
 
 const router = express.Router();
 
-// Load User model
-const User = require('../models/User');
 // Load Todo model
 const Todo = require('../models/Todo');
+// Load validation
+const validateTodoInput = require('../validation/todo');
 
-// @route   GET api/todos
+// @route   GET api/todos/
 // @desc    Get all todos
 // @access  Private
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   Todo.find({ user: req.user.id })
+    .sort({ created_at: -1 })
     .then(todos => res.json(todos))
     .catch(err => res.status(404).json(err));
 });
@@ -21,6 +22,13 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 // @desc    Create a new todo
 // @access  Private
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const { errors, isValid } = validateTodoInput(req.body);
+
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const newTodo = new Todo({
     task: req.body.task,
     priority: req.body.priority,
@@ -40,7 +48,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
       // Delete
       todo.remove().then(() => res.json({ success: true }));
     })
-    .catch(err => res.status(404).json({ data: err }));
+    .catch(err => res.status(404).json(err));
 });
 
 // @route   PUT api/todos/:id

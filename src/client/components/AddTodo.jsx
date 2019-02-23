@@ -5,14 +5,11 @@ import { connect } from 'react-redux';
 
 import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
-import Todo from './Todo';
 
 import colors from '../_helpers/colors';
 
 import { addTodoRequest } from '../sagas/todoSagas';
 import { clearErrorsRequest } from '../sagas/errorSagas';
-
-const moment = require('moment');
 
 const Panel = styled.div`
   display: flex;
@@ -24,7 +21,7 @@ const Panel = styled.div`
   & > h3 {
     text-transform: capitalize;
     color: ${colors.white};
-    font-family: 'Staatliches', cursive;
+    font-family: 'Bitter', serif;
     font-size: 1.2rem;
     margin: 0.8rem;
   }
@@ -34,7 +31,7 @@ const H4 = styled.h4`
   text-transform: capitalize;
   color: ${colors.white};
   margin: 0.5rem 0;
-  font-family: 'Staatliches', cursive;
+  font-family: 'Bitter', serif;
 `;
 
 const InputBox = styled.div`
@@ -104,7 +101,7 @@ const AddBtn = styled.button`
   padding: 0.5rem;
   background-color: #98ce00;
   color: #fff;
-  font-family: 'Staatliches', cursive;
+  font-family: 'Bitter', serif;
   transition: background-color 0.5s ease-out;
   &:hover {
     background-color: #000;
@@ -115,8 +112,8 @@ const ErrorText = styled.div`
   color: #fff;
   font-family: 'Raleway', sans-serif;
   font-size: 0.8rem;
-  background-color: black;
-  position: relative;
+  width: 172px;
+  background-color: ${colors.black};
 `;
 
 class AddTodo extends Component {
@@ -159,7 +156,7 @@ class AddTodo extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
     return (
       <Panel>
         <h3>add todo</h3>
@@ -226,7 +223,7 @@ class AddTodo extends Component {
             daySize={30}
           />
 
-          {/* {errors.get_done_by && <ErrorText>{errors.get_done_by}</ErrorText>} */}
+          {errors.get_done_by && <ErrorText>{errors.get_done_by}</ErrorText>}
           <AddBtn type="submit">Add</AddBtn>
         </form>
       </Panel>

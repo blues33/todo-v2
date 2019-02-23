@@ -17,11 +17,11 @@ import {
 // Register flow
 function* registerUser(action) {
   try {
-    const res = yield call(axios.post, '/api/auth/register', action.data);
+    const res = yield call(axios.post, '/api/users/register', action.data);
     action.history.push('/login');
     yield put({ type: USER_REGISTER_SUCCESS });
   } catch (err) {
-    yield put({ type: ERRORS_GET, payload: err.response.data.errors });
+    yield put({ type: ERRORS_GET, payload: err.response.data });
   }
 }
 
@@ -52,7 +52,7 @@ function* loginUser(action) {
     // redirecting
     action.history.push('/');
   } catch (err) {
-    yield put({ type: ERRORS_GET, payload: err.response.data.errors });
+    yield put({ type: ERRORS_GET, payload: err.response.data });
   }
 }
 

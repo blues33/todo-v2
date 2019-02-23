@@ -1,6 +1,5 @@
+import isEmpty from 'lodash/isEmpty';
 import { USER_SET } from '../actions/types';
-
-const _ = require('lodash');
 
 const initialState = {
   isAuthenticated: false,
@@ -12,7 +11,7 @@ export default function (state = initialState, action) {
     case USER_SET:
       return {
         ...state,
-        isAuthenticated: !_.isEmpty(action.payload),
+        isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
 

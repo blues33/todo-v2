@@ -19,6 +19,7 @@ import About from './components/About';
 import Footer from './components/layout/Footer';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import NotFound from './components/common/NotFound';
 
 const Container = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ export default class App extends PureComponent {
               <Route exact path="/about" component={About} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/not-found" component={NotFound} />
             </Container>
             <Footer />
           </div>

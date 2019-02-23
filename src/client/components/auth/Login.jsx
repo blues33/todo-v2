@@ -25,7 +25,7 @@ const LoginBox = styled.div`
     font-size: 2rem;
     letter-spacing: 1px;
     margin-bottom: 1rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Bitter', serif;
   }
 `;
 
@@ -37,7 +37,6 @@ const Input = styled.input`
   margin: 0 0 1rem;
   padding: 0.6rem;
   font-size: 14px;
-  font-family: 'Raleway', sans-serif;
   &:focus {
     background-color: #fff;
   }
@@ -53,7 +52,6 @@ const LoginBtn = styled.button`
   color: #ffffff;
   font-size: 0.8rem;
   cursor: pointer;
-  font-family: 'Roboto', sans-serif;
   transition: background-color 0.5s ease-out;
   &:hover {
     background-color: #9cd631;
@@ -64,7 +62,6 @@ const RegisterLink = styled.p`
   margin: 15px 0 0;
   color: #fff;
   font-size: 12px;
-  font-family: 'Raleway', sans-serif;
   & > a {
     color: #86ac41;
   }
@@ -74,9 +71,8 @@ const ErrorText = styled.div`
   color: #fff;
   position: relative;
   top: -16px;
-  font-family: 'Raleway', sans-serif;
   font-size: 0.8rem;
-  background-color: black;
+  background-color: ${colors.black};
   border-right: 3px solid red;
   border-left: 3px solid red;
 `;
@@ -150,7 +146,10 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  loginRequest: PropTypes.func.isRequired,
+  clearErrorsRequest: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

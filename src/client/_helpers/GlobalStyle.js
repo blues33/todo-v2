@@ -9,7 +9,8 @@ ${reset}
 
 /* Custom global styles */
 
-@import url('https://fonts.googleapis.com/css?family=Lato|Staatliches');
+@import url('https://fonts.googleapis.com/css?family=Bitter|Lato');
+
 
 
 html {

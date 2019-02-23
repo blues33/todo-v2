@@ -22,7 +22,7 @@ function* addTodo(action) {
     const todos = yield call(axios.post, '/api/todos', action.data);
     yield put({ type: TODO_ADD_SUCCESS, payload: todos.data });
   } catch (err) {
-    yield put({ type: ERRORS_GET, payload: err });
+    yield put({ type: ERRORS_GET, payload: err.response.data });
   }
 }
 
@@ -60,7 +60,7 @@ function* deleteTodo(action) {
     const todo = yield call(axios.delete, `/api/todos/${action.id}`);
     yield put({ type: TODO_DELETE_SUCCESS, payload: action.id });
   } catch (err) {
-    yield put({ type: ERRORS_GET, payload: err.data });
+    yield put({ type: ERRORS_GET, payload: err.response.data });
   }
 }
 
